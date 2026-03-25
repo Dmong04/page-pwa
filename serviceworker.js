@@ -11,6 +11,9 @@ const CACHE_DYNAMIC_NAME = 'dynamic-v1'
 const CACHE_IMMUTABLE_NAME = 'immutable-v1'
 const MAX_CACHE_ITEMS = 50
 
+// Detecta el base path automáticamente (funciona en local y en GitHub Pages)
+const BASE_PATH = self.location.pathname.replace('/serviceworker.js', '')
+
 //ETAPA DE INSTALACION
 self.addEventListener('install', event => {
     console.log("Service Worker en proceso de instalacion")
@@ -18,10 +21,10 @@ self.addEventListener('install', event => {
     const cacheStatic = caches.open(CACHE_STATIC_NAME)
         .then(cache => {
             return cache.addAll([
-                '/',
-                '/index.html',
-                '/css/style.css',
-                '/js/script.js',
+                `${BASE_PATH}/`,
+                `${BASE_PATH}/index.html`,
+                `${BASE_PATH}/css/style.css`,
+                `${BASE_PATH}/js/script.js`,
                 /*Agregar imagenes*/
             ])
         })
@@ -121,7 +124,7 @@ self.addEventListener('fetch', event => {
             if (resolved) return
             resolved = true
             if (/\.(png|jpg|jpeg|webp)$/i.test(event.request.url)) {
-                resolve(caches.match('/img/no-image.png'))
+                resolve(caches.match(`${BASE_PATH}/img/no-image.png`))
             } else {
                 reject(new Error('Sin respuesta de la red ni del cache'))
             }
