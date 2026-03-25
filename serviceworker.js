@@ -30,8 +30,7 @@ self.addEventListener('install', event => {
     const cacheImmutable = caches.open(CACHE_IMMUTABLE_NAME)
         .then(cache => {
             return cache.addAll([
-                'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-
+                // 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
             ])
         })
 
