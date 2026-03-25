@@ -19,9 +19,9 @@ self.addEventListener('install', event => {
         .then(cache => {
             return cache.addAll([
                 '/',
-                'index.html',
-                'css/style.css',
-                'js/script.js',
+                '/index.html',
+                '/css/style.css',
+                '/js/script.js',
                 /*Agregar imagenes*/
             ])
         })
